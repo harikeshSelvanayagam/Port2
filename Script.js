@@ -185,4 +185,44 @@ if (taglineElement) {
     taglineElement.setAttribute('data-text', taglineElement.textContent); // Set initial data-text
     activateGlitch(taglineElement);
               }
-              
+// Basic implementation example
+const canvas = document.getElementById('avatarCanvas');
+const ctx = canvas.getContext('2d');
+const avatar = {
+  x: 50,
+  y: window.innerHeight - 100,
+  frame: 0,
+  spriteSheet: new Image(),
+  frameCount: 8, // Number of animation frames
+  frameWidth: 64,
+  frameHeight: 64
+};
+
+// Load sprite sheet
+avatar.spriteSheet.src = '/storage/emulated/0/Download/spritesheet (1).png';
+
+// Animation loop
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw current frame
+  ctx.drawImage(
+    avatar.spriteSheet,
+    avatar.frame * avatar.frameWidth, 0, // source x, y
+    avatar.frameWidth, avatar.frameHeight, // source width, height
+    avatar.x, avatar.y, // destination x, y
+    avatar.frameWidth, avatar.frameHeight // destination width, height
+  );
+  
+  // Cycle frames
+  avatar.frame = (avatar.frame + 1) % avatar.frameCount;
+  
+  requestAnimationFrame(animate);
+}
+
+// Make avatar follow scroll
+window.addEventListener('scroll', () => {
+  avatar.y = window.scrollY + window.innerHeight - 100;
+});
+
+animate();
