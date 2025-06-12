@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- AI Avatar Following (More advanced, but still basic) ---
-    const aiAvatar = document.getElementById('ai-avatar');
+    const aiAvatar = document.getElementById('spritesheet');
     if (aiAvatar) {
         let currentX = window.innerWidth / 2;
         let currentY = window.innerHeight / 2;
